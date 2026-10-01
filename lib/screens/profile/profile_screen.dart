@@ -144,7 +144,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Switch.adaptive(
                         value: themeProvider.isDarkMode,
-                        activeColor: AppColors.primary,
+                        activeTrackColor: AppColors.primary,
                         onChanged: (val) => themeProvider.toggleTheme(val),
                       ),
                     ],
