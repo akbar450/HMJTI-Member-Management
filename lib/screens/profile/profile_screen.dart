@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../providers/auth_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/confirmation_dialog.dart';
 import '../../widgets/custom_button.dart';
 import '../auth/login_screen.dart';
@@ -93,6 +94,67 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
+          // Settings Header & Theme Switch
+          const Text(
+            'Pengaturan',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 8),
+
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return Card(
+                elevation: 1.5,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Icon(
+                          themeProvider.isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                          color: AppColors.primary,
+                          size: 20,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Tema Aplikasi',
+                              style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              themeProvider.isDarkMode ? 'Mode Gelap (Dark)' : 'Mode Terang (Light)',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Switch.adaptive(
+                        value: themeProvider.isDarkMode,
+                        activeColor: AppColors.primary,
+                        onChanged: (val) => themeProvider.toggleTheme(val),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+
           // Application Info Header
           const Text(
             'Informasi Aplikasi',
@@ -144,6 +206,7 @@ class ProfileScreen extends StatelessWidget {
             onPressed: () => _handleLogout(context),
           ),
           const SizedBox(height: 16),
+
         ],
       ),
     );

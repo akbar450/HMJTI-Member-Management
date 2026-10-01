@@ -5,8 +5,8 @@ class ApiConstants {
   // Use 'localhost' for Chrome / Web / Windows App / iOS Simulator or ADB reverse
   // Use your PC's Wi-Fi IP (e.g. '192.168.1.7') for Physical Android Device
   static const String _hostWeb = 'http://localhost/hmjti_api/api';
-  // IP Laptop Anda saat ini: 192.168.1.22
-  static const String _hostAndroid = 'http://192.168.1.22/hmjti_api/api';
+  // IP Laptop Anda saat ini: 10.0.1.137
+  static const String _hostAndroid = 'http://10.0.1.137/hmjti_api/api';
 
   static String get baseUrl {
     if (kIsWeb) {
