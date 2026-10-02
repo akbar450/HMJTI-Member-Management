@@ -66,10 +66,10 @@ class MemberCard extends StatelessWidget {
                   children: [
                     Text(
                       member.nama,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.textPrimary,
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -77,9 +77,9 @@ class MemberCard extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       'NIM: ${member.nim} • ${member.angkatan}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 13,
-                        color: AppColors.textSecondary,
+                        color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.7) ?? AppColors.textSecondary,
                       ),
                     ),
                   ],

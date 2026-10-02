@@ -4,6 +4,7 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_strings.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/member_provider.dart';
+import '../../providers/theme_provider.dart';
 import '../../widgets/confirmation_dialog.dart';
 import '../../widgets/member_stats_card.dart';
 import '../anggota/member_list_screen.dart';
@@ -61,6 +62,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ? 'Data Anggota'
                 : 'Profil Pengguna'),
         actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return IconButton(
+                icon: Icon(
+                  themeProvider.isDarkMode
+                      ? Icons.light_mode_rounded
+                      : Icons.dark_mode_rounded,
+                ),
+                tooltip: themeProvider.isDarkMode
+                    ? 'Beralih ke Mode Terang'
+                    : 'Beralih ke Mode Gelap',
+                onPressed: () {
+                  themeProvider.toggleTheme(!themeProvider.isDarkMode);
+                },
+              );
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout_rounded),
             tooltip: 'Logout',
@@ -153,6 +171,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
             },
           ),
           const Divider(),
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, child) {
+              return ListTile(
+                leading: Icon(
+                  themeProvider.isDarkMode
+                      ? Icons.dark_mode_rounded
+                      : Icons.light_mode_rounded,
+                  color: AppColors.primary,
+                ),
+                title: Text(
+                  themeProvider.isDarkMode ? 'Mode Gelap' : 'Mode Terang',
+                ),
+                trailing: Switch.adaptive(
+                  value: themeProvider.isDarkMode,
+                  activeTrackColor: AppColors.primary,
+                  onChanged: (val) => themeProvider.toggleTheme(val),
+                ),
+              );
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.logout_rounded, color: AppColors.error),
             title: const Text('Logout', style: TextStyle(color: AppColors.error)),

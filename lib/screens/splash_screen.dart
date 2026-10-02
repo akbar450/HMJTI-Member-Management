@@ -36,7 +36,9 @@ class _SplashScreenState extends State<SplashScreen>
     );
 
     _controller.forward();
-    _checkAuthAndNavigate();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkAuthAndNavigate();
+    });
   }
 
   Future<void> _checkAuthAndNavigate() async {

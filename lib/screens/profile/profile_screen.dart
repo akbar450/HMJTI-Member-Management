@@ -57,18 +57,18 @@ class ProfileScreen extends StatelessWidget {
                   const SizedBox(height: 12),
                   Text(
                     user?.name ?? 'Pengurus HMJTI',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.textPrimary,
+                      color: Theme.of(context).textTheme.titleLarge?.color,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     user?.email ?? 'admin@hmjti.ac.id',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: AppColors.textSecondary,
+                      color: Theme.of(context).textTheme.bodyMedium?.color?.withValues(alpha: 0.7) ?? AppColors.textSecondary,
                     ),
                   ),
                   const SizedBox(height: 12),
@@ -170,24 +170,28 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   _buildAppInfoTile(
+                    context: context,
                     icon: Icons.apps_rounded,
                     title: 'Nama Aplikasi',
                     subtitle: AppStrings.appName,
                   ),
                   const Divider(height: 20),
                   _buildAppInfoTile(
+                    context: context,
                     icon: Icons.info_outline_rounded,
                     title: 'Versi',
                     subtitle: AppStrings.appVersion,
                   ),
                   const Divider(height: 20),
                   _buildAppInfoTile(
+                    context: context,
                     icon: Icons.groups_outlined,
                     title: 'Organisasi',
                     subtitle: AppStrings.organizationName,
                   ),
                   const Divider(height: 20),
                   _buildAppInfoTile(
+                    context: context,
                     icon: Icons.account_balance_outlined,
                     title: 'Universitas',
                     subtitle: AppStrings.universityName,
@@ -213,6 +217,7 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Widget _buildAppInfoTile({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required String subtitle,
@@ -234,15 +239,18 @@ class ProfileScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).textTheme.bodySmall?.color?.withValues(alpha: 0.7) ?? AppColors.textSecondary,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
                 subtitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.textPrimary,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
                 ),
               ),
             ],
